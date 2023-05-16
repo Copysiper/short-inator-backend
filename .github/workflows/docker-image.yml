@@ -1,0 +1,21 @@
+name: Docker Image CI
+
+on:
+  workflow_run:
+    workflows: ['BootJar CI (Gradle)']
+    types:
+      - completed
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Download BootJar
+      uses: dawidd6/action-download-artifact@v2
+      with:
+        workflow: gradle.yml
+        workflow_conclusion: success
+        path: build/libs
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag shortinator/app:$(date +%s)
