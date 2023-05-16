@@ -41,6 +41,10 @@ tasks.withType<Javadoc> {
     options.encoding = "UTF-8"
 }
 
+tasks.named<Jar>("jar") {
+    enabled = false
+}
+
 tasks.register("dockerImage") {
     dependsOn("clean")
     dependsOn("bootJar")
