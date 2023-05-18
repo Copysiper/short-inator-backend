@@ -1,4 +1,4 @@
-name: Docker Image Build
+name: Docker Image CI
 
 on:
   workflow_run:
@@ -17,5 +17,14 @@ jobs:
         workflow: gradle.yml
         workflow_conclusion: success
         path: build/libs
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag shortinator/app:$(date +%s)
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_LOGIN }}
+        password: ${{ secrets.DOCKER_PASS }}
+    - name: Build and push
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        push: true
+        tags: copysiper/shortinator-backend:latest
