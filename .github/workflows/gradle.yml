@@ -1,4 +1,4 @@
-name: BootJar CI (Gradle)
+name: Gradle Build
 
 on:
   push:
