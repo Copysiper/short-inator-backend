@@ -1,8 +1,8 @@
-name: Docker Image CI
+name: Docker Image Build
 
 on:
   workflow_run:
-    workflows: ['BootJar CI (Gradle)']
+    workflows: ['Gradle Build']
     types:
       - completed
 
