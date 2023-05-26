@@ -36,11 +36,13 @@ public class LinkController {
         this.keyRepository = keyRepository;
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/info/{id}")
     public ResponseEntity<Link> getRedirectLink(@PathVariable String id) {
         return ResponseEntity.of(linkRepository.findById(id));
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/{id}")
     public ResponseEntity<?> getLink(@PathVariable String id) {
         HttpHeaders headers = new HttpHeaders();
@@ -49,6 +51,7 @@ public class LinkController {
         return new ResponseEntity<String>(headers, HttpStatus.FOUND);
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping(consumes = {"application/json"})
     public ResponseEntity<?> createLink(@RequestBody Link link, @RequestParam("key") String apiKey) throws URISyntaxException {
         if ((!isFreeAllowed) && apiKey.equals(freeKey)) {
