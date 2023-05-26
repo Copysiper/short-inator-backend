@@ -51,7 +51,7 @@ tasks.register("dockerImage") {
     tasks["bootJar"].mustRunAfter("clean")
     doLast {
         exec {
-            commandLine("docker", "build", "-t", "shortinator/app", ".")
+            commandLine("docker", "build", "-t", "copysiper/shortinator-backend", ".")
         }
     }
 }
